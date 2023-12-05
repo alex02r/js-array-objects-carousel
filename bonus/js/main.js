@@ -16,25 +16,15 @@ function cerateCarosello(array) {
 
 //funzione che visualizza l'immagine corrente nel carosello
 function checkCurrentImage(i) {
-   /*  //array contenente tutte le immagini del carosello
+    //array contenente tutte le immagini del carosello
     const list = document.getElementsByClassName('img');
 
-    //SOLUZIONE NON MOLTO EFFICENTE 
-    if (img_current > 0) {
-        list[i-1].classList.remove('selected');
-    }else{
-        list[list.length-1].classList.remove('selected');
-    }
-
-    if(img_current < images.length -1){
-        list[i+1].classList.remove('selected');
-    }else{
-        list[0].classList.remove('selected');
+    const element_selected = document.getElementsByClassName('selected'); 
+    for (let j = 0; j < element_selected.length; j++) {
+        element_selected[j].classList.remove('selected');
     }
     
     list[i].classList.add('selected');
-    
-    //console.log(list[i]); */
 }
 
 //funzione che visualizza la foto successiva
@@ -53,11 +43,7 @@ function nextImage(i, valori) {
         title.innerText = valori[i].title;
         text.innerText = valori[i].text;
 
-        list[i].classList.add('selected');
-        list[i-1].classList.remove('selected');
-        console.log(i);
-    }else{
-        list[0].classList.remove('selected');
+        checkCurrentImage(i);
     }
 }
 //funzione che visualizza l'immagine precedente
@@ -72,10 +58,7 @@ function prevImage(i, valori){
         title.innerText = valori[i].title;
         text.innerText = valori[i].text;
 
-        list[i].classList.add('selected');
-        list[i+1].classList.remove('selected');
-    }else{
-        list[list.length-1].classList.remove('selected');
+        checkCurrentImage(i);
     }
 }
 
@@ -116,9 +99,14 @@ let img_current = 0;
 
 let scorrimento;
 playBtn.addEventListener('click', ()=>{
-     scorrimento = setInterval(()=>{
-
-    }, 5000);
+    scorrimento = setInterval(()=>{
+        if(img_current < images.length -1){
+            img_current ++;
+        }else{
+            img_current = 0;
+        }
+        nextImage(img_current, images);
+        }, 3000);
 })
 stopBtn.addEventListener('click',()=>{
     clearInterval(scorrimento);
@@ -127,14 +115,12 @@ stopBtn.addEventListener('click',()=>{
 prev.addEventListener('click', function(){
     //dobbiamo far visualizzare la FOTO PRECEDENTE
     
-    checkCurrentImage(img_current);
     prevImage(img_current, images);
     if (img_current > 0) {
         img_current --;
     }else{
         img_current = images.length - 1;
     }
-    console.log(img_current);
 });
 
 next.addEventListener('click', function(){
@@ -145,7 +131,5 @@ next.addEventListener('click', function(){
         img_current = 0;
     }
     nextImage(img_current, images);
-    console.log(img_current);
-    checkCurrentImage(img_current);
 });
 checkCurrentImage(img_current);
