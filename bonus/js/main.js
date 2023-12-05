@@ -1,3 +1,18 @@
+//creazione carosello
+function cerateCarosello(array) {
+    const container = document.getElementById('img-container');
+    for (let i = 0; i < array.length; i++) {
+        let div_img = document.createElement('div');
+        div_img.classList.add('img');
+        let img = document.createElement('img');
+        let src = `./${array[i].image}`;
+        img.src= src;
+        img.alt= array[i].title;
+        div_img.appendChild(img);
+        container.appendChild(div_img);
+    }
+}
+
 //funzione che visualizza la foto successiva
 function nextImage(i, valori) {
     //valori[i] è l'immagine che stiamo visualizzando ora.
@@ -14,7 +29,6 @@ function nextImage(i, valori) {
         text.innerText = valori[i].text;
     }
 }
-
 //funzione che visualizza l'immagine precedente
 function prevImage(i, valori){
     if(i >= 0){
@@ -55,6 +69,8 @@ const images = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
+
+cerateCarosello(images);
 
 const prev = document.getElementById('prev');
 const next = document.getElementById('next');
