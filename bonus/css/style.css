@@ -117,3 +117,10 @@
     height: 100%;
     object-fit: cover;
 }
+.overlay{
+    opacity: 0.5;
+}
+.selected{
+    opacity: 1;
+    border: 1px solid #ccc;
+}

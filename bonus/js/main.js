@@ -4,6 +4,7 @@ function cerateCarosello(array) {
     for (let i = 0; i < array.length; i++) {
         let div_img = document.createElement('div');
         div_img.classList.add('img');
+        div_img.classList.add('overlay');
         let img = document.createElement('img');
         let src = `./${array[i].image}`;
         img.src= src;
@@ -15,10 +16,25 @@ function cerateCarosello(array) {
 
 //funzione che visualizza l'immagine corrente nel carosello
 function checkCurrentImage(i) {
-    //array contenente tutte le immagini del carosello
+   /*  //array contenente tutte le immagini del carosello
     const list = document.getElementsByClassName('img');
 
-    console.log(list[i]);
+    //SOLUZIONE NON MOLTO EFFICENTE 
+    if (img_current > 0) {
+        list[i-1].classList.remove('selected');
+    }else{
+        list[list.length-1].classList.remove('selected');
+    }
+
+    if(img_current < images.length -1){
+        list[i+1].classList.remove('selected');
+    }else{
+        list[0].classList.remove('selected');
+    }
+    
+    list[i].classList.add('selected');
+    
+    //console.log(list[i]); */
 }
 
 //funzione che visualizza la foto successiva
@@ -26,7 +42,8 @@ function nextImage(i, valori) {
     //valori[i] è l'immagine che stiamo visualizzando ora.
     //noi dobbiamo visulizzare img+1
     //prima dobbiamo fare il controllo se img è l'ultima posizione dell'array
-    if(i < valori.length){
+    const list = document.getElementsByClassName('img');
+    if(i < valori.length ){
         //possiamo visualizzare le immagini
         const img = document.getElementById('img');
         const title = document.getElementById('title');
@@ -35,10 +52,17 @@ function nextImage(i, valori) {
         img.src = `./${valori[i].image}`;
         title.innerText = valori[i].title;
         text.innerText = valori[i].text;
+
+        list[i].classList.add('selected');
+        list[i-1].classList.remove('selected');
+        console.log(i);
+    }else{
+        list[0].classList.remove('selected');
     }
 }
 //funzione che visualizza l'immagine precedente
 function prevImage(i, valori){
+    const list = document.getElementsByClassName('img');
     if(i >= 0){
         const img = document.getElementById('img');
         const title = document.getElementById('title');
@@ -47,6 +71,11 @@ function prevImage(i, valori){
         img.src = `./${valori[i].image}`;
         title.innerText = valori[i].title;
         text.innerText = valori[i].text;
+
+        list[i].classList.add('selected');
+        list[i+1].classList.remove('selected');
+    }else{
+        list[list.length-1].classList.remove('selected');
     }
 }
 
@@ -79,10 +108,22 @@ const images = [
 ];
 
 cerateCarosello(images);
-
+const playBtn = document.getElementById('play');
+const stopBtn = document.getElementById('stop');
 const prev = document.getElementById('prev');
 const next = document.getElementById('next');
 let img_current = 0;
+
+let scorrimento;
+playBtn.addEventListener('click', ()=>{
+     scorrimento = setInterval(()=>{
+
+    }, 5000);
+})
+stopBtn.addEventListener('click',()=>{
+    clearInterval(scorrimento);
+});
+
 prev.addEventListener('click', function(){
     //dobbiamo far visualizzare la FOTO PRECEDENTE
     
