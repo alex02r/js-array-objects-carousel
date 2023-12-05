@@ -13,6 +13,14 @@ function cerateCarosello(array) {
     }
 }
 
+//funzione che visualizza l'immagine corrente nel carosello
+function checkCurrentImage(i) {
+    //array contenente tutte le immagini del carosello
+    const list = document.getElementsByClassName('img');
+
+    console.log(list[i]);
+}
+
 //funzione che visualizza la foto successiva
 function nextImage(i, valori) {
     //valori[i] è l'immagine che stiamo visualizzando ora.
@@ -77,6 +85,8 @@ const next = document.getElementById('next');
 let img_current = 0;
 prev.addEventListener('click', function(){
     //dobbiamo far visualizzare la FOTO PRECEDENTE
+    
+    checkCurrentImage(img_current);
     prevImage(img_current, images);
     if (img_current > 0) {
         img_current --;
@@ -95,5 +105,6 @@ next.addEventListener('click', function(){
     }
     nextImage(img_current, images);
     console.log(img_current);
-    
+    checkCurrentImage(img_current);
 });
+checkCurrentImage(img_current);
