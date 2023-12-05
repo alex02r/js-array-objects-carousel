@@ -6,7 +6,13 @@ function nextImage(img, valori) {
     let i = img + 1;
     if(i < valori.length){
         //possiamo visualizzare le immagini
-        console.log(valori[i]);
+        const img = document.getElementById('img');
+        const title = document.getElementById('title');
+        const text = document.getElementById('text');
+        
+        img.src = `./${valori[i].image}`;
+        title.innerText = valori[i].title;
+        text.innerText = valori[i].text;
     }
 }
 
@@ -14,8 +20,13 @@ function nextImage(img, valori) {
 function prevImage(img, valori){
     let i = img - 1;
     if(i >= 0){
-        //possiamo visualizzare le immagini
-        console.log(valori[i]);
+        const img = document.getElementById('img');
+        const title = document.getElementById('title');
+        const text = document.getElementById('text');
+        
+        img.src = `./${valori[i].image}`;
+        title.innerText = valori[i].title;
+        text.innerText = valori[i].text;
     }
 }
 
