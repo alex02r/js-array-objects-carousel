@@ -10,6 +10,14 @@ function nextImage(img, valori) {
     }
 }
 
+//funzione che visualizza l'immagine precedente
+function prevImage(img, valori){
+    let i = img - 1;
+    if(i >= 0){
+        //possiamo visualizzare le immagini
+        console.log(valori[i]);
+    }
+}
 
 const images = [
     {
@@ -44,10 +52,17 @@ const next = document.getElementById('next');
 let img_current = 0;
 prev.addEventListener('click', function(){
     //dobbiamo far visualizzare la FOTO PRECEDENTE
+    prevImage(img_current, images);
+    if (img_current > 0) {
+        img_current --;
+    }
 });
 
 next.addEventListener('click', function(){
     //dobbiamo far visualizzare la FOTO SUCCESSIVA
     nextImage(img_current, images);
-    img_current ++;
+    if(img_current < images.length - 1){
+        img_current ++;
+    }
+    console.log(img_current);
 });
