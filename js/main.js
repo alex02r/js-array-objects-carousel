@@ -1,9 +1,8 @@
 //funzione che visualizza la foto successiva
-function nextImage(img, valori) {
+function nextImage(i, valori) {
     //valori[i] è l'immagine che stiamo visualizzando ora.
     //noi dobbiamo visulizzare img+1
     //prima dobbiamo fare il controllo se img è l'ultima posizione dell'array
-    let i = img + 1;
     if(i < valori.length){
         //possiamo visualizzare le immagini
         const img = document.getElementById('img');
@@ -17,8 +16,7 @@ function nextImage(img, valori) {
 }
 
 //funzione che visualizza l'immagine precedente
-function prevImage(img, valori){
-    let i = img - 1;
+function prevImage(i, valori){
     if(i >= 0){
         const img = document.getElementById('img');
         const title = document.getElementById('title');
@@ -66,14 +64,20 @@ prev.addEventListener('click', function(){
     prevImage(img_current, images);
     if (img_current > 0) {
         img_current --;
+    }else{
+        img_current = images.length - 1;
     }
+    console.log(img_current);
 });
 
 next.addEventListener('click', function(){
     //dobbiamo far visualizzare la FOTO SUCCESSIVA
-    nextImage(img_current, images);
-    if(img_current < images.length - 1){
+    if(img_current < images.length -1){
         img_current ++;
+    }else{
+        img_current = 0;
     }
+    nextImage(img_current, images);
     console.log(img_current);
+    
 });
